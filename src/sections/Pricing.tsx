@@ -20,7 +20,7 @@ const pricingTiers = [
   },
   {
     title: "Pro",
-    monthlyPrice: 9,
+    monthlyPrice: 29,
     buttonText: "Sign up now",
     popular: true,
     inverse: true,
@@ -36,7 +36,7 @@ const pricingTiers = [
   },
   {
     title: "Business",
-    monthlyPrice: 19,
+    monthlyPrice: 99,
     buttonText: "Sign up now",
     popular: false,
     inverse: false,
@@ -57,13 +57,13 @@ const pricingTiers = [
 
 export const Pricing = () => {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-white" id="pricing">
       <div className="container">
         <div className="section-heading">
           <h2 className="section-title">Pricing</h2>
           <p className="section-description mt-5">
-            Free forever. Upgrade for unlimited tasks, better security, and
-            exclusive features.
+            Upgrade for unlimited tasks, better security, and exclusive
+            features.
           </p>
         </div>
         <div className="flex flex-col gap-6 items-center mt-10 lg:flex-row lg:items-end lg:justify-center">
@@ -77,6 +77,7 @@ export const Pricing = () => {
               features,
             }) => (
               <div
+                key={monthlyPrice}
                 className={twMerge(
                   "card",
                   inverse === true && "border-black bg-black text-white"
@@ -103,7 +104,7 @@ export const Pricing = () => {
                           ease: "linear",
                           repeatType: "loop",
                         }}
-                        className="bg-[linear-gradient(to_right,#DD7DDF,#E1CD86,#BBCB92,#71C2EF,#3BFFFF,#DD7DDF,#E1CD86,#BBCB92,#71C2EF,#3BFFFF,#DD7DDF)] [background-size:200%] text-transparent bg-clip-text font-medium"
+                        className="bg-[linear-gradient(to_right,#DD7DDF,#E1CD86,#BBCB92,#71C2EF,#3BFFFF,#DD7DDF,#E1CD86,#BBCB92,#71C2EF,#3BFFFF)] [background-size:200%] text-transparent bg-clip-text font-medium"
                       >
                         Popular
                       </motion.span>
@@ -128,7 +129,10 @@ export const Pricing = () => {
                 </button>
                 <ul className="flex flex-col gap-5 mt-8">
                   {features.map((feature) => (
-                    <li className="text-sm flex items-center gap-4">
+                    <li
+                      key={feature}
+                      className="text-sm flex items-center gap-4"
+                    >
                       <CheckIcon className="h-6 w-6" />
                       <span>{feature}</span>
                     </li>
