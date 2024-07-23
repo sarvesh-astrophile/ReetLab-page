@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import avatar1 from "@/assets/avatar-1.png";
 import avatar2 from "@/assets/avatar-2.png";
 import avatar3 from "@/assets/avatar-3.png";
@@ -10,7 +11,6 @@ import avatar8 from "@/assets/avatar-8.png";
 import avatar9 from "@/assets/avatar-9.png";
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
-import { motion } from "framer-motion";
 import React from "react";
 
 const testimonials = [
@@ -94,25 +94,37 @@ const TestimonialsColumn = (props: {
     >
       {[...new Array(2)].fill(0).map((_, index) => (
         <React.Fragment key={index}>
-          {props.testimonials.map(({ text, imageSrc, name, username }) => (
-            <div className="card">
-              <div>{text}</div>
-              <div className="flex items-center gap-2 mt-5">
-                <Image
-                  src={imageSrc}
-                  alt={name}
-                  width={40}
-                  height={40}
-                  className="h-10 w-10 rounded-full"
-                />
-                <div className="flex flex-col">
-                  <div className="font-medium tracking-tight leading-5">
-                    {name}
+          {[...new Array(2)].fill(0).map((_, outerIndex) => (
+            <React.Fragment key={`fragment-${outerIndex}`}>
+              {props.testimonials.map(
+                ({ text, imageSrc, name, username }, innerIndex) => (
+                  <div
+                    className="card"
+                    key={`${username}-${outerIndex}-${innerIndex}`}
+                  >
+                    <div>{text}</div>
+                    <div className="flex items-center gap-2 mt-5">
+                      <Image
+                        src={imageSrc}
+                        alt={name}
+                        width={40}
+                        height={40}
+                        className="h-10 w-10 rounded-full"
+                      />
+                      {/* ... */}
+                      <div className="flex flex-col">
+                        <div className="font-medium tracking-tight leading-5">
+                          {name}
+                        </div>
+                        <div className="leading-5 tracking-tight">
+                          {username}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="leading-5 tracking-tight">{username}</div>
-                </div>
-              </div>
-            </div>
+                )
+              )}
+            </React.Fragment>
           ))}
         </React.Fragment>
       ))}
@@ -122,7 +134,7 @@ const TestimonialsColumn = (props: {
 
 export const Testimonials = () => {
   return (
-    <section className="bg-white">
+    <section className="bg-white" id="testimonials">
       <div className="container">
         <div className="section-heading">
           <div className="flex justify-center">
